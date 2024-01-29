@@ -17,3 +17,6 @@ RoxygenNote: 7.2.3
 VignetteBuilder: knitr
 URL: https://github.com/yangzhao98/getSH4GWASCatalog
 BugReports: https://github.com/yangzhao98/getSH4GWASCatalog/issues
+Imports: 
+    httr,
+    rvest

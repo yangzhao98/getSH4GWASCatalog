@@ -1,23 +1,29 @@
+#' @title Get unharmonised urls from GWAS Catalog
+#'
+#' @param accessionNumber An accession number
+#'
+#' @export
+getUrlFromGWASCatalog <- function(accessionNumber) {
+  ## Setup the fixed ftp website
+  .url <- "https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics"
+  ## Generate the access number range
+  x <- as.numeric(gsub("GCST","",accessionNumber))/1000
+  if (all(x%%1==0)) { genRange <- x-1 } else {genRange <- floor(x)}
+  .url. <- paste("GCST",
+                 c(genRange*1000+1,(genRange+1)*1000),
+                 collapse="-",sep="")
+  ## Generate the dataset
+  url. <- paste(accessionNumber,"/",
+                paste(accessionNumber,"_buildGRCh37.tsv.gz",sep=""),
+                sep="")
+  paste(.url,"/",.url.,"/",url.,sep="")
+}
+
 #' @title Generate a shell script for downloading summary-level data from GWAS Catalog
 #' @param accessionNumberList The accession number or a vector of accession numbers
 #' @export
 getSH4GWASCatalog <- function(accessionNumberList) {
   ## Generate the url for downloading summary statistics from GWAS Catalog
-  getUrlFromGWASCatalog <- function(accessionNumber) {
-    ## Setup the fixed ftp website
-    .url <- "https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics"
-    ## Generate the access number range
-    genRange <- floor(as.numeric(gsub("GCST","",accessionNumber))/1000)
-    .url. <- paste("GCST",
-                   c(genRange*1000+1,(genRange+1)*1000),
-                   collapse="-",sep="")
-    ## Generate the dataset
-    url. <- paste(accessionNumber,"/",
-                  paste(accessionNumber,"_buildGRCh37.tsv.gz",sep=""),
-                  sep="")
-    paste(.url,"/",.url.,"/",url.,sep="")
-  }
-
   urls <- unlist(lapply(accessionNumberList,
                         FUN=function(i) {
                           aref <- getUrlFromGWASCatalog(i)
@@ -33,3 +39,30 @@ getSH4GWASCatalog <- function(accessionNumberList) {
                    data.frame(x=aEnd1),data.frame(x=aEnd2))
   return(datUrls)
 }
+
+#' @title Get harmonised urls given a accession number
+#'
+#' @param accessionNumberLists A vector contains accession number lists
+#'
+#' @export
+getHarmonizedUrlsFromGWASCatalog <- function(accessionNumberLists) {
+  urls <- unlist(
+    lapply(accessionNumberLists,
+           FUN=function(i) {
+             ## Setup the fixed ftp website
+             .url <- "https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics"
+             ## Generate the access number range
+             x <- as.numeric(gsub("GCST","",i))/1000
+             if (all(x%%1==0)) { genRange <- x-1 } else {genRange <- floor(x)}
+             .url. <- paste("GCST",
+                            c(genRange*1000+1,(genRange+1)*1000),
+                            collapse="-",sep="")
+             ## Generate the dataset
+             url <- paste(.url,"/",.url.,"/",i,"/harmonised/",sep="")
+             links <- getHttpsFromURL(url)
+             links <- grep(".h.tsv.gz",links,value=TRUE)
+             return(paste(url,links,sep=""))
+           }))
+  return(urls)
+}
+
