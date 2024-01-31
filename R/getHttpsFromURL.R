@@ -9,3 +9,4 @@ getHttpsFromURL <- function(url) {
       rvest::read_html(httr::content(httr::GET(url),"text")),"a"),"href")
   return(links)
 }
+
