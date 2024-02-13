@@ -42,12 +42,12 @@ getSH4GWASCatalog <- function(accessionNumberList) {
 
 #' @title Get harmonised urls given a accession number
 #'
-#' @param accessionNumberLists A vector contains accession number lists
+#' @param accessionNumberList A vector contains accession number lists
 #'
 #' @export
-getHarmonizedUrlsFromGWASCatalog <- function(accessionNumberLists) {
+getHarmonizedUrlsFromGWASCatalog <- function(accessionNumberList) {
   urls <- unlist(
-    lapply(accessionNumberLists,
+    lapply(accessionNumberList,
            FUN=function(i) {
              ## Setup the fixed ftp website
              .url <- "https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics"
@@ -65,4 +65,25 @@ getHarmonizedUrlsFromGWASCatalog <- function(accessionNumberLists) {
            }))
   return(urls)
 }
+
+
+#' @title Generate a shell script for parallel downloading harmonised summary-level data from GWAS Catalog
+#' @param accessionNumberList The accession number or a vector of accession numbers
+#' @export
+getSH4HarmonizedGWASCatalog <- function(accessionNumberList) {
+  urls <- getHarmonizedUrlsFromGWASCatalog(accessionNumberList=accessionNumberList)
+  url <- unlist(
+    lapply(urls,FUN=function(x) {
+      paste("wget ", x, " &", sep="")
+    })
+  )
+  aHead <- "!#/bin/bash"
+  aEnd1 <- "wati &"
+  aEnd2 <- "echo All datasets are downloaded!"
+  datUrls <- rbind(data.frame(x=aHead),
+                   data.frame(x=url),
+                   data.frame(x=aEnd1),
+                   data.frame(x=aEnd2))
+}
+
 

@@ -4,10 +4,10 @@
 \alias{getHarmonizedUrlsFromGWASCatalog}
 \title{Get harmonised urls given a accession number}
 \usage{
-getHarmonizedUrlsFromGWASCatalog(accessionNumberLists)
+getHarmonizedUrlsFromGWASCatalog(accessionNumberList)
 }
 \arguments{
-\item{accessionNumberLists}{A vector contains accession number lists}
+\item{accessionNumberList}{A vector contains accession number lists}
 }
 \description{
 Get harmonised urls given a accession number
