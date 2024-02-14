@@ -47,5 +47,5 @@ dos2unix downloadUrl.sh | ./downloadUrl.sh
 ## Get all links from a website
 
 ``` r
-getHhttpsFrom(url="https://pheweb.jp/downloads")[1:5]
+getHttpsFrom(url="https://pheweb.jp/downloads")[1:5]
 ```

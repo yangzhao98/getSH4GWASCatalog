@@ -33,7 +33,7 @@ getSH4GWASCatalog <- function(accessionNumberList) {
   ## Generate shell script for downloading summary statistics in parallel
   ## This step is very useful when downloading multiple datasets
   aHead <- "!#/bin/bash"
-  aEnd1 <- "wait &"
+  aEnd1 <- "wait"
   aEnd2 <- "echo All datasets are downloaded"
   datUrls <- rbind(data.frame(x=aHead),data.frame(x=urls),
                    data.frame(x=aEnd1),data.frame(x=aEnd2))
@@ -78,7 +78,7 @@ getSH4HarmonizedGWASCatalog <- function(accessionNumberList) {
     })
   )
   aHead <- "!#/bin/bash"
-  aEnd1 <- "wati &"
+  aEnd1 <- "wait"
   aEnd2 <- "echo All datasets are downloaded!"
   datUrls <- rbind(data.frame(x=aHead),
                    data.frame(x=url),
