@@ -79,11 +79,29 @@ getSH4HarmonizedGWASCatalog <- function(accessionNumberList) {
   )
   aHead <- "!#/bin/bash"
   aEnd1 <- "wait"
-  aEnd2 <- "echo All datasets are downloaded!"
+  aEnd2 <- "echo 'All datasets are downloaded!'"
   datUrls <- rbind(data.frame(x=aHead),
                    data.frame(x=url),
                    data.frame(x=aEnd1),
                    data.frame(x=aEnd2))
 }
 
-
+#' @title Generate a shell script for parallel donwloading given a vector of urls
+#' @param urls A vector of urls
+#' @param outPath Path for saving the shell script
+#' @export
+generateSH <- function(urls,outPath) {
+  urls <- ifelse(grepl("wget",urls),
+                 paste(urls, " & ", sep=""),
+                 paste("wget ", urls, " & ", sep=""))
+  aHead <- "!#/bin/bash"
+  aEnd1 <- "wait"
+  aEnd2 <- "echo 'All datasets are downloaded!'"
+  datUrls <- rbind(data.frame(x=aHead),data.frame(x=urls),
+                   data.frame(x=aEnd1),data.frame(x=aEnd2))
+  utils::write.table(
+    datUrls,
+    file=paste(outPath,"/downloadUrls.sh",sep=""),
+    quote=FALSE,row.names=FALSE,col.names=FALSE
+  )
+}
