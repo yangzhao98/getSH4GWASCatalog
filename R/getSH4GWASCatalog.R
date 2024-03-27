@@ -34,13 +34,13 @@ getSH4GWASCatalog <- function(accessionNumberList) {
   ## This step is very useful when downloading multiple datasets
   aHead <- "!#/bin/bash"
   aEnd1 <- "wait"
-  aEnd2 <- "echo All datasets are downloaded"
+  aEnd2 <- "echo 'All datasets are downloaded!'"
   datUrls <- rbind(data.frame(x=aHead),data.frame(x=urls),
                    data.frame(x=aEnd1),data.frame(x=aEnd2))
   return(datUrls)
 }
 
-#' @title Get harmonised urls given a accession number
+#' @title Get harmonized urls given a accession number
 #'
 #' @param accessionNumberList A vector contains accession number lists
 #'
