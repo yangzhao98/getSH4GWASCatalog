@@ -86,7 +86,7 @@ getSH4HarmonizedGWASCatalog <- function(accessionNumberList) {
                    data.frame(x=aEnd2))
 }
 
-#' @title Generate a shell script for parallel donwloading given a vector of urls
+#' @title Generate a shell script for parallel downloading given a vector of urls
 #' @param urls A vector of urls
 #' @param outPath Path for saving the shell script
 #' @export
