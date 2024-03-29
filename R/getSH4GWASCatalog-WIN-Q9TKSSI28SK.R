@@ -1,6 +1,7 @@
 #' @title Get unharmonised urls from GWAS Catalog
+#'
 #' @param accessionNumber An accession number
-#' @keywords internal
+#'
 #' @export
 getUrlFromGWASCatalog <- function(accessionNumber) {
   ## Setup the fixed ftp website
@@ -33,14 +34,16 @@ getSH4GWASCatalog <- function(accessionNumberList) {
   ## This step is very useful when downloading multiple datasets
   aHead <- "!#/bin/bash"
   aEnd1 <- "wait"
-  aEnd2 <- "echo 'All datasets are downloaded!'"
+  aEnd2 <- "echo All datasets are downloaded"
   datUrls <- rbind(data.frame(x=aHead),data.frame(x=urls),
                    data.frame(x=aEnd1),data.frame(x=aEnd2))
   return(datUrls)
 }
 
-#' @title Get harmonized urls given a accession number
+#' @title Get harmonised urls given a accession number
+#'
 #' @param accessionNumberList A vector contains accession number lists
+#'
 #' @export
 getHarmonizedUrlsFromGWASCatalog <- function(accessionNumberList) {
   urls <- unlist(
@@ -83,7 +86,7 @@ getSH4HarmonizedGWASCatalog <- function(accessionNumberList) {
                    data.frame(x=aEnd2))
 }
 
-#' @title Generate a shell script for parallel downloading given a vector of urls
+#' @title Generate a shell script for parallel donwloading given a vector of urls
 #' @param urls A vector of urls
 #' @param outPath Path for saving the shell script
 #' @export

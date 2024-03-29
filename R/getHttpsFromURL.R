@@ -1,7 +1,5 @@
 #' @title Get all links from a url
-#'
 #' @param url The url of a website
-#'
 #' @export
 getHttpsFromURL <- function(url) {
   links <- rvest::html_attr(
