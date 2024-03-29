@@ -2,7 +2,7 @@
 % Please edit documentation in R/getSH4GWASCatalog.R
 \name{generateSH}
 \alias{generateSH}
-\title{Generate a shell script for parallel donwloading given a vector of urls}
+\title{Generate a shell script for parallel downloading given a vector of urls}
 \usage{
 generateSH(urls, outPath)
 }
@@ -12,5 +12,5 @@ generateSH(urls, outPath)
 \item{outPath}{Path for saving the shell script}
 }
 \description{
-Generate a shell script for parallel donwloading given a vector of urls
+Generate a shell script for parallel downloading given a vector of urls
 }

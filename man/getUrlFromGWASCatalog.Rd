@@ -12,3 +12,4 @@ getUrlFromGWASCatalog(accessionNumber)
 \description{
 Get unharmonised urls from GWAS Catalog
 }
+\keyword{internal}

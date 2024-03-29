@@ -2,7 +2,7 @@
 % Please edit documentation in R/getSH4GWASCatalog.R
 \name{getHarmonizedUrlsFromGWASCatalog}
 \alias{getHarmonizedUrlsFromGWASCatalog}
-\title{Get harmonised urls given a accession number}
+\title{Get harmonized urls given a accession number}
 \usage{
 getHarmonizedUrlsFromGWASCatalog(accessionNumberList)
 }
@@ -10,5 +10,5 @@ getHarmonizedUrlsFromGWASCatalog(accessionNumberList)
 \item{accessionNumberList}{A vector contains accession number lists}
 }
 \description{
-Get harmonised urls given a accession number
+Get harmonized urls given a accession number
 }
